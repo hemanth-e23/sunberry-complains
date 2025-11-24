@@ -8,9 +8,9 @@ import UserManagement from './pages/UserManagement';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/sunberry-complains">
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/create-complaint" element={<CreateComplaint />} />
