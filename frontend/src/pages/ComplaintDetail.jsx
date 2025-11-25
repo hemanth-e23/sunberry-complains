@@ -119,6 +119,26 @@ const ComplaintDetail = () => {
                             <p style={{ lineHeight: '1.6', color: 'var(--text-primary)' }}>{complaint.description}</p>
                         </div>
 
+                        {complaint.tags && complaint.tags.length > 0 && (
+                            <div style={{ marginBottom: '2rem' }}>
+                                <h3 style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>Tags</h3>
+                                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                                    {complaint.tags.map((tag) => (
+                                        <span key={tag.id} style={{
+                                            padding: '0.5rem 1rem',
+                                            borderRadius: '0.5rem',
+                                            fontSize: '0.875rem',
+                                            fontWeight: '500',
+                                            background: 'var(--brand-gradient)',
+                                            color: 'white'
+                                        }}>
+                                            {tag.name}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
                         <div style={{ marginBottom: '2rem' }}>
                             <h3 style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>Assigned To</h3>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
