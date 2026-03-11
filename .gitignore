@@ -28,7 +28,13 @@ Thumbs.db
 *.swp
 *.swo
 
+# Uploads
+uploads/
+
 # Frontend
 node_modules/
 dist/
 .cache/
+
+# Python virtual env
+.venv/

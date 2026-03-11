@@ -15,18 +15,18 @@ async def list_users(
     limit: int = 100,
     search: str = None,
     db: AsyncSession = Depends(database.get_db),
-    current_user: models.User = Depends(auth.get_current_admin_user)
+    current_user: models.User = Depends(auth.get_current_superuser)
 ):
-    """List all users (admin only)"""
+    """List all users (superuser only)"""
     return await crud.get_users(db, skip=skip, limit=limit, search=search)
 
 @router.post("/", response_model=schemas.User)
 async def create_user(
     user: schemas.UserCreate,
     db: AsyncSession = Depends(database.get_db),
-    current_user: models.User = Depends(auth.get_current_admin_user)
+    current_user: models.User = Depends(auth.get_current_superuser)
 ):
-    """Create a new user (admin only)"""
+    """Create a new user (superuser only)"""
     db_user = await crud.get_user_by_username(db, username=user.username)
     if db_user:
         raise HTTPException(status_code=400, detail="Username already registered")
@@ -37,9 +37,9 @@ async def update_user(
     user_id: int,
     user_update: schemas.UserUpdate,
     db: AsyncSession = Depends(database.get_db),
-    current_user: models.User = Depends(auth.get_current_admin_user)
+    current_user: models.User = Depends(auth.get_current_superuser)
 ):
-    """Update user details (admin only)"""
+    """Update user details (superuser only)"""
     db_user = await crud.update_user(db, user_id=user_id, user_update=user_update)
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
@@ -50,9 +50,9 @@ async def reset_password(
     user_id: int,
     password_reset: schemas.PasswordReset,
     db: AsyncSession = Depends(database.get_db),
-    current_user: models.User = Depends(auth.get_current_admin_user)
+    current_user: models.User = Depends(auth.get_current_superuser)
 ):
-    """Reset user password (admin only)"""
+    """Reset user password (superuser only)"""
     db_user = await crud.reset_user_password(db, user_id=user_id, new_password=password_reset.new_password)
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
@@ -62,9 +62,9 @@ async def reset_password(
 async def toggle_status(
     user_id: int,
     db: AsyncSession = Depends(database.get_db),
-    current_user: models.User = Depends(auth.get_current_admin_user)
+    current_user: models.User = Depends(auth.get_current_superuser)
 ):
-    """Toggle user active/inactive status (admin only)"""
+    """Toggle user active/inactive status (superuser only)"""
     db_user = await crud.toggle_user_status(db, user_id=user_id)
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")

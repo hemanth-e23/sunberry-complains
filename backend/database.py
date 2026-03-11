@@ -1,16 +1,10 @@
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-import os
 
-user = os.environ.get("USER", "postgres")
-# Assuming no password for local dev on Mac, or change as needed
-DATABASE_URL = os.getenv("DATABASE_URL", f"postgresql+asyncpg://{user}@localhost/complaints_db")
+from config import DATABASE_URL
 
-# Fallback to postgres user if needed (commented out)
-# DATABASE_URL = "postgresql+asyncpg://postgres:postgres@localhost/complaints_db"
-
-engine = create_async_engine(DATABASE_URL, echo=True)
+engine = create_async_engine(DATABASE_URL, echo=False)
 
 AsyncSessionLocal = sessionmaker(
     engine, class_=AsyncSession, expire_on_commit=False

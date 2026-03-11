@@ -4,5 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/sunberry-complains/',
+  // For local development: use '/'
+  // For GitHub Pages production build: change to '/sunberry-complains/'
+  base: '/',
 })

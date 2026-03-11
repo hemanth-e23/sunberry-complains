@@ -9,6 +9,9 @@ export const useIdleTimeout = () => {
 
     const logout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('username');
+        localStorage.removeItem('userRole');
+        localStorage.removeItem('isSuperuser');
         navigate('/login');
     };
 
