@@ -23,6 +23,8 @@ services:
       - CORS_ORIGINS=${CORS_ORIGINS}
     ports:
       - "8000:8000"
+    volumes:
+      - uploads_data:/app/uploads
     restart: always
 
   tunnel:
@@ -34,3 +36,4 @@ services:
 
 volumes:
   postgres_data:
+  uploads_data:
